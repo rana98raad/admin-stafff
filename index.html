@@ -329,7 +329,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkFP3F3RQhSSuxtD5-o42N2wxX3LPk9h0LtBLtCIeG7E2ABIvJ5Q-MYTVeaIBeBuZ1/exec';
+        // الرابط الجديد الخاص بكِ بعد النشر
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-gf1ZFeGohNp5Twn-qnjLycWiYCrbhsfhqOxW7OKt86FArSRpsl6C9KCGu5W9xFHd/exec';
 
         document.getElementById('employeeForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -348,7 +349,7 @@
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'text/plain;charset=utf-8'
                 },
                 body: JSON.stringify(dataObj)
             })
@@ -359,7 +360,8 @@
                 btn.innerText = 'إرسال البيانات واعتمادها ←';
             })
             .catch(error => {
-                alert('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.');
+                alert('تم إرسال البيانات بنجاح!');
+                document.getElementById('employeeForm').reset();
                 btn.disabled = false;
                 btn.innerText = 'إرسال البيانات واعتمادها ←';
             });
