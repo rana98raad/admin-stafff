@@ -323,14 +323,12 @@
     </div>
 
     <script>
-        // دالة إظهار الاستمارة عند الضغط على زر بدء التعبئة
         function openForm() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('form-screen').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // رابط الـ Webhook الخاص بكِ
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkFP3F3RQhSSuxtD5-o42N2wxX3LPk9h0LtBLtCIeG7E2ABIvJ5Q-MYTVeaIBeBuZ1/exec';
 
         document.getElementById('employeeForm').addEventListener('submit', function(e) {
@@ -341,21 +339,27 @@
             btn.innerText = 'جاري الإرسال...';
 
             const formData = new FormData(this);
+            const dataObj = {};
+            formData.forEach((value, key) => {
+                dataObj[key] = value;
+            });
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: formData
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataObj)
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(() => {
                 alert('تم حفظ وإرسال البيانات بنجاح!');
                 document.getElementById('employeeForm').reset();
                 btn.disabled = false;
                 btn.innerText = 'إرسال البيانات واعتمادها ←';
             })
             .catch(error => {
-                alert('تم إرسال البيانات بنجاح!');
-                document.getElementById('employeeForm').reset();
+                alert('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.');
                 btn.disabled = false;
                 btn.innerText = 'إرسال البيانات واعتمادها ←';
             });
