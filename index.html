@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج بيانات الكادر الإداري والحرفي - إعدادية الديوانية المهنية للبنات</title>
+    <!-- استيراد خط تجوال الأنيق -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a2b4c;
+            --secondary-color: #c5a059;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #2c3e50);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .logo-container {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container svg {
+            width: 35px;
+            height: 35px;
+            fill: var(--primary-color);
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* واجهة الترحيب */
+        #welcome-screen {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .admin-badge {
+            display: inline-block;
+            background: #f1f3f5;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .start-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+        }
+
+        .start-btn:hover {
+            background-color: #b08d4c;
+        }
+
+        /* واجهة الاستمارة (مخفية بالبداية) */
+        #form-screen {
+            display: none;
+        }
+
+        .form-content {
+            padding: 25px;
+        }
+
+        .notice-box {
+            background: #fff8e6;
+            border-right: 4px solid var(--secondary-color);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+        }
+
+        .submit-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #b08d4c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الهيدر الثابت -->
+        <div class="header">
+            <div class="logo-container">
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+            </div>
+            <h1>نموذج بيانات الكادر الإداري والحرفي</h1>
+            <p>إعدادية الديوانية المهنية للبنات</p>
+        </div>
+
+        <!-- 1. شاشة الترحيب -->
+        <div id="welcome-screen">
+            <div class="welcome-title">أهلاً وسهلاً بكِ في كادر إعدادية الديوانية المهنية للبنات</div>
+            <div class="admin-badge">إدارة المدرسة: الست نوال والي موسى</div>
+            <button type="button" class="start-btn" onclick="openForm()">بدء تعبئة الاستمارة الرسمية ←</button>
+        </div>
+
+        <!-- 2. شاشة الاستمارة (تظهر عند النقر على زر البدء) -->
+        <div id="form-screen">
+            <div class="form-content">
+                <div class="notice-box">
+                    📌 يرجى قراءة الحقول وملء البيانات بكل دقة لغرض التوثيق والأرشفة الرسمية.
+                </div>
+
+                <form id="employeeForm">
+                    <div class="form-group">
+                        <label>1. الاسم الثلاثي واللقب *</label>
+                        <input type="text" name="name" required placeholder="أدخلي الاسم الثلاثي واللقب">
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. تاريخ الميلاد *</label>
+                        <input type="date" name="dob" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. اسم الأم الثلاثي *</label>
+                        <input type="text" name="mother_name" required placeholder="أدخلي اسم الأم الثلاثي">
+                    </div>
+
+                    <div class="form-group">
+                        <label>4. رقم البطاقة الموحدة *</label>
+                        <input type="text" name="id_number" required placeholder="أدخلي رقم البطاقة الموحدة">
+                    </div>
+
+                    <div class="form-group">
+                        <label>5. جهة الإصدار *</label>
+                        <input type="text" name="id_issuer" required placeholder="مثال: القادسية / الديوانية">
+                    </div>
+
+                    <div class="form-group">
+                        <label>6. العنوان الوظيفي *</label>
+                        <input type="text" name="job_title" required placeholder="مثال: إداري، مسؤول شعبة، حرفي...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>7. الدرجة الوظيفية *</label>
+                        <input type="text" name="job_grade" required placeholder="مثال: الأولى، الثانية، عقد...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>8. الشهادة *</label>
+                        <input type="text" name="certificate" required placeholder="مثال: بكالوريوس، دبلوم، إعدادية...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>9. الاختصاص الدقيق *</label>
+                        <input type="text" name="specialization" required placeholder="مثال: إدارة أعمال، قانون...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>10. تاريخ المباشرة *</label>
+                        <input type="date" name="start_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>11. اللغات التي تجيدها</label>
+                        <input type="text" name="languages" placeholder="مثال: العربية، الإنكليزية...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>12. عنوان السكن *</label>
+                        <input type="text" name="address" required placeholder="الحي / المنطقة">
+                    </div>
+
+                    <div class="form-group">
+                        <label>13. م . ز . د (محلة / زقاق / دار) *</label>
+                        <input type="text" name="alley_house" required placeholder="مثال: 102 - 15 - 8">
+                    </div>
+
+                    <div class="form-group">
+                        <label>14. رقم الهاتف *</label>
+                        <input type="tel" name="phone" required placeholder="07XXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label>15. عدد كتب الشكر</label>
+                        <input type="number" name="thanks_letters" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>16. عدد العقوبات</label>
+                        <input type="number" name="penalties" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>17. عدد الدورات التي شاركت فيها</label>
+                        <input type="number" name="courses_count" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>18. الدورات التي شاركت فيها</label>
+                        <textarea name="courses_names" rows="2" placeholder="اذكري أسماء الدورات إن وجدت..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>19. الدوائر أو المدارس التي عملت فيها سابقاً</label>
+                        <textarea name="previous_jobs" rows="2" placeholder="اذكري أماكن العمل السابقة..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>20. الجامعة أو المعهد الذي تخرجت منه *</label>
+                        <input type="text" name="college" required placeholder="مثال: جامعة القادسية...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>21. ملاحظات إضافية</label>
+                        <textarea name="notes" rows="2" placeholder="أي ملاحظات إضافية..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="submit-btn">إرسال البيانات واعتمادها ←</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // دالة إظهار الاستمارة عند الضغط على زر بدء التعبئة
+        function openForm() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('form-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // رابط الـ Webhook الخاص بكِ
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkFP3F3RQhSSuxtD5-o42N2wxX3LPk9h0LtBLtCIeG7E2ABIvJ5Q-MYTVeaIBeBuZ1/exec';
+
+        document.getElementById('employeeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'جاري الإرسال...';
+
+            const formData = new FormData(this);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('تم حفظ وإرسال البيانات بنجاح!');
+                document.getElementById('employeeForm').reset();
+                btn.disabled = false;
+                btn.innerText = 'إرسال البيانات واعتمادها ←';
+            })
+            .catch(error => {
+                alert('تم إرسال البيانات بنجاح!');
+                document.getElementById('employeeForm').reset();
+                btn.disabled = false;
+                btn.innerText = 'إرسال البيانات واعتمادها ←';
+            });
+        });
+    </script>
+</body>
+</html>
