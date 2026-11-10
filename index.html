@@ -323,14 +323,15 @@
     </div>
 
     <script>
+        // دالة إظهار الاستمارة عند الضغط على زر بدء التعبئة
         function openForm() {
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('form-screen').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // الرابط الجديد الخاص بكِ بعد النشر
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-gf1ZFeGohNp5Twn-qnjLycWiYCrbhsfhqOxW7OKt86FArSRpsl6C9KCGu5W9xFHd/exec';
+        // رابط الـ Webhook الخاص بكِ
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkFP3F3RQhSSuxtD5-o42N2wxX3LPk9h0LtBLtCIeG7E2ABIvJ5Q-MYTVeaIBeBuZ1/exec';
 
         document.getElementById('employeeForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -340,20 +341,13 @@
             btn.innerText = 'جاري الإرسال...';
 
             const formData = new FormData(this);
-            const dataObj = {};
-            formData.forEach((value, key) => {
-                dataObj[key] = value;
-            });
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'text/plain;charset=utf-8'
-                },
-                body: JSON.stringify(dataObj)
+                body: formData
             })
-            .then(() => {
+            .then(response => response.json())
+            .then(data => {
                 alert('تم حفظ وإرسال البيانات بنجاح!');
                 document.getElementById('employeeForm').reset();
                 btn.disabled = false;
